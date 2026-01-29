@@ -6,51 +6,65 @@ export default function Profile() {
   const [user, setUser] = useState(null);
   const [messages, setMessages] = useState([]);
   const [imagePreview, setImagePreview] = useState(null);
+  const [error, setError] = useState("");
 
-  // Fetch user data when page loads
+  // 1. ALL Hooks must be at the top
   useEffect(() => {
-    axios.get("http://localhost:3001/api/profile")
-      .then(res => {
-        setUser(res.data);
-      })
-      .catch(err => console.error(err));
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+      setError("No token found. Please log in.");
+      return;
+    }
+
+    axios.get("http://localhost:3001/api/auth/profile", {
+      headers: { Authorization: `Bearer ${token}` }
+    })
+    .then(res => {
+      // res.data should contain { id, name, email, image ... }
+      setUser(res.data);
+    })
+    .catch(err => {
+      console.error("Profile fetch failed:", err);
+      setError("Failed to load profile.");
+    });
   }, []);
 
-  if (!user) return <div>Loading...</div>;
-
+  // 2. Event handlers
   const handleImageChange = (e) => {
     const file = e.target.files[0];
-    setImagePreview(URL.createObjectURL(file));
+    if (file) {
+      setImagePreview(URL.createObjectURL(file));
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setMessages([]);
+    const token = localStorage.getItem("token");
 
-    const formData = new FormData();
-    formData.append("update_name", user.name);
-    formData.append("update_email", user.email);
-    formData.append("update_pass", e.target.update_pass.value);
-    formData.append("new_pass", e.target.new_pass.value);
-    formData.append("confirm_pass", e.target.confirm_pass.value);
-
-    if (e.target.update_image.files[0]) {
-      formData.append("update_image", e.target.update_image.files[0]);
-    }
+    const updateData = {
+      update_name: user.name,
+      update_email: user.email
+    };
 
     try {
-      const res = await axios.post("http://localhost:3001/api/profile", formData, {
-        headers: { "Content-Type": "multipart/form-data" }
+      const res = await axios.post("http://localhost:3001/api/auth/update-profile", updateData, {
+        headers: { Authorization: `Bearer ${token}` }
       });
-      setMessages(res.data.messages);
-    } catch {
-      setMessages(["Something went wrong."]);
+      // Assuming backend returns an array of messages
+      setMessages(res.data.messages || ["Profile updated!"]);
+    } catch (error) {
+      setMessages([error.response?.data?.message || "Something went wrong."]);
     }
   };
 
+  // 3. Conditional returns ONLY after all hooks
+  if (error) return <div className="error">{error}</div>;
+  if (!user) return <div>Loading...</div>;
+
   return (
     <div className="update-profile">
-
       <img
         src={
           imagePreview ||
@@ -66,13 +80,12 @@ export default function Profile() {
 
       <form onSubmit={handleSubmit} encType="multipart/form-data">
         <div className="flex">
-          
           <div className="inputBox">
             <span>Username :</span>
             <input
               type="text"
               className="box"
-              value={user.name}
+              value={user.name || ""}
               onChange={(e) => setUser({ ...user, name: e.target.value })}
               name="update_name"
             />
@@ -81,7 +94,7 @@ export default function Profile() {
             <input
               type="email"
               className="box"
-              value={user.email}
+              value={user.email || ""}
               onChange={(e) => setUser({ ...user, email: e.target.value })}
               name="update_email"
             />
@@ -98,20 +111,15 @@ export default function Profile() {
 
           <div className="inputBox">
             <span>Old password :</span>
-            <input type="password" className="box" name="update_pass" />
-
+            <input type="password" Name="update_pass" className="box" />
             <span>New password :</span>
-            <input type="password" className="box" name="new_pass" />
-
+            <input type="password" Name="new_pass" className="box" />
             <span>Confirm password :</span>
-            <input type="password" className="box" name="confirm_pass" />
+            <input type="password" Name="confirm_pass" className="box" />
           </div>
-
         </div>
-
         <button type="submit" className="btn">Update Profile</button>
       </form>
-
     </div>
   );
 }

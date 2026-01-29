@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
-//import { Provider } from "react-redux";
+import { Provider } from "react-redux";
 
 // Page/Component Imports - Consolidate all external imports here
 import PopularMovies from "./pages/popular.jsx"; // 
@@ -12,8 +12,8 @@ import Watchlist from "./pages/watchlist.jsx";
 import Results from "./pages/results-page";
 
 // Context & Utility Imports
-//import AuthContext from "./contexts/AuthContext.jsx";
-//import RequiredAuth from "./contexts/RequireAuth.jsx";
+import AuthContext from "./contexts/AuthContext.jsx";
+import RequiredAuth from "./contexts/RequireAuth.jsx";
 
 // Component Imports
 import SearchBar from "./components/SearchBar.jsx";
@@ -43,7 +43,7 @@ function App() {
   // --- AUTHENTICATION LOGIC (Login/Logout/Token Check) ---
 
   // Check for stored token on mount
-  /*useEffect(() => {
+  useEffect(() => {
     const token = localStorage.getItem("token");
     setIsLoggedIn(!!token);
     if (token) {
@@ -73,7 +73,7 @@ function App() {
     localStorage.removeItem("token");
     delete axios.defaults.headers.common["Authorization"];
     setIsLoggedIn(false);
-  };*/
+  };
 
   // --- MOVIE DATA AND GENRE LOGIC ---
 
@@ -207,82 +207,128 @@ function App() {
 
   // --- MAIN COMPONENT RENDER ---
 
- return (
-    <BrowserRouter>
-      <BackgroundTrailer youtubeKey={trailerKey} />
+   return (
+    <AuthContext.Provider value={{ isLoggedIn, login, logout }}>
+      <BrowserRouter>
+        <BackgroundTrailer youtubeKey={trailerKey} />
 
-      <div className="header">
-        <div className="header-left">
-          <Link to="/">
-            <img src={headerImage} alt="WAW logo" className="logo" />
-          </Link>
+        {/* header */}
+        <div className="header">
+          <div className="header-left">
+            <Link to="/">
+              <img src={headerImage} alt="WAW MOVIES logo" className="logo" />
+            </Link>
+          </div>
+
+          <div className="header-center">
+            <Link to="/" style={{ textDecoration: "none", color: "inherit" }}>
+              <h1 className="waw-title">WAW MOVIES</h1>
+            </Link>
+          </div>
+          <button
+            className="navbar-toggler"
+            type="button"
+            onClick={handleToggle}
+            aria-expanded={isMenuOpen ? "true" : "false"}
+            aria-label="Toggle navigation"
+          >
+            <span className="navbar-toggler-icon">☰</span>{" "}
+          </button>
+          <div
+            className={`header-right navbar-collapse ${
+              isMenuOpen ? "show" : ""
+            }`}
+          >
+            <nav className="header-links">
+              <Link to="/popular" className="popularMovies-link">
+                Popular Movies
+              </Link>
+              <Link to="/watchlist" className="watchlist-link">
+                {" "}
+                Watchlist
+              </Link>
+              <Link to="/register" className="register-link">
+                Register
+              </Link>
+              <Link to="/login" className="login-link">
+                Login
+              </Link>
+            </nav>
+          </div>
         </div>
 
-        <div className="header-center">
-          <Link to="/" style={{ textDecoration: "none", color: "inherit" }}>
-            <h1 className="waw-title">WAW MOVIES</h1>
-          </Link>
-        </div>
+        {/* main content */}
+        <div className="app-content">
+          <Routes>
+            {/* Home Page - Root '/' */}
+            <Route
+              path="/"
+              element={
+                <>
+                  <SearchBar
+                    placeholder="Search for a movie, tv shows..."
+                    data={filteredMovies}
+                    onSearch={handleSearch}
+                    onSelect={(movie) => setFilteredMovies([movie])}
+                  />
 
-        <button className="navbar-toggler" onClick={handleToggle}>
-          <span className="navbar-toggler-icon">☰</span>
-        </button>
-
-        <div className={`header-right navbar-collapse ${isMenuOpen ? "show" : ""}`}>
-          <nav className="header-links">
-            <Link to="/popular" className="popularMovies-link">Popular Movies</Link>
-            <Link to="/watchlist" className="watchlist-link">Watchlist</Link>
-            <Link to="/register" className="register-link">Register</Link>
-            <Link to="/login" className="login-link">Login</Link>
-          </nav>
-        </div>
-      </div>
-
-      <div className="app-content">
-        <Routes>
-          <Route path="/" element={
-            <>
-              <SearchBar 
-                placeholder="Search movies..." 
-                data={filteredMovies} 
-                onSearch={handleSearch} 
-                onSelect={(movie) => setFilteredMovies([movie])} 
-              />
-              <MovieGrid 
-                movieData={filteredMovies} 
-                watchlist={watchlist} 
-                toggleWatchlist={toggleWatchlist} 
-              />
-            </>
-          } />
+                  <MovieGrid
+                    // MovieGrid needs movie data to render
+                    movieData={filteredMovies}
+                    watchlist={watchlist}
+                    toggleWatchlist={toggleWatchlist}
           
-          <Route path="/popular" element={
-            <PopularMovies 
-              onClick={fetchMovieData} 
-              movieData={filteredMovies} 
-              watchlist={watchlist} 
-              toggleWatchlist={toggleWatchlist} 
-              resetFilters={resetFilters} 
+                  />
+                </>
+              }
             />
-          } />
+            {/* Popular movies (duplicate link for clarity) */}
+            <Route
+              path="/popular"
+              element={
+                <PopularMovies
+                  onClick={fetchMovieData}
+                  movieData={filteredMovies}
+                  watchlist={watchlist}
+                  toggleWatchlist={toggleWatchlist}
+                  resetFilters={resetFilters}
+                />
+              }
+            />
 
-          <Route path="/watchlist" element={
-            <Watchlist movies={watchlist} onToggle={toggleWatchlist} />
-          } />
+            {/* Watchlist page route */}
+            <Route
+              path="/watchlist"
+              element={
+                <Watchlist movies={watchlist} onToggle={toggleWatchlist} />
+              }
+            />
 
-          <Route path="/results-page/:movieId" element={<Results genresMap={movieGenre} />} />
-          
-          {/* Auth Routes kept as simple pages for now until backend is ready */}
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/profile" element={<Profile />} />
-        </Routes>
-      </div>
+            <Route
+              path="/results-page/:movieId"
+              element={<Results genresMap={movieGenre} />}
+            />
 
-      <div className="footer">
-        <p>© {new Date().getFullYear()} WAWMovies. All rights reserved.</p>
-      </div>
-    </BrowserRouter>
+            {/* Auth Routes */}
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route
+              path="/profile"
+              element={
+                <RequiredAuth>
+                  {" "}
+                  <Profile />{" "}
+                </RequiredAuth>
+              }
+            />
+          </Routes>
+        </div>
+        {/* Footer */}
+        <div className="footer">
+          <p>© {new Date().getFullYear()} WAWMovies. All rights reserved.</p>
+        </div>
+      </BrowserRouter>
+    </AuthContext.Provider>
   );
 }
 

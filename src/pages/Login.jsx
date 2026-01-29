@@ -1,7 +1,7 @@
 import React, {useState, useContext} from 'react'
 import './login.css'
 import axios from 'axios'
-//import AuthContext from '../contexts/AuthContext.jsx';
+import AuthContext from '../contexts/AuthContext.jsx';
 import { Link } from 'react-router-dom';
 
 const Login = () => {
