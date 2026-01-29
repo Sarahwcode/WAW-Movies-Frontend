@@ -1,42 +1,191 @@
 #root {
-  max-width: 1280px;
+  width: 100%;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
 }
 
+
+.header {
+  width: 100%;
+  height: 80px;
+  background-color: black;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 20px;
+}
+
+.header-left {
+  position: absolute;
+  left: 20px;
+}
+
+.header-center {
+  flex-grow: 1;
+  text-align: center;
+}
+
+.header-right {
+  position: absolute;
+  right: 20px;
+}
+
+.header-right nav {
+  display: flex;
+  gap: 20px;
+}
+
+
 .logo {
-  height: 6em;
-  padding: 1.5em;
+  max-height: 70px;
+  width: auto;
   will-change: filter;
   transition: filter 300ms;
 }
+
 .logo:hover {
   filter: drop-shadow(0 0 2em #646cffaa);
 }
+
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+
+.waw-title {
+  font-size: 3.5rem;
+  color: rgb(223, 158, 36);
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  margin: 0;
+  font-weight: bold;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
+
+.popularMovies-link,
+.watchlist-link,
+.register-link,
+.login-link {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  font-size: 18px; /* kept one value (removed duplicate 1.1em) */
+}
+
+.popularMovies-link:hover,
+.watchlist-link:hover, 
+.register-link:hover,
+.login-link:hover {
+  color: orange;
+}
+
+
+.app-content {
+  position: relative;
+  z-index: 1;
+  padding-top: 600px;
+}
+
+
+.navbar-toggler {
+  display: none;
+  background: none;
+  border: 1px solid white;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+  padding: 5px 10px;
+}
+
+.navbar-toggler-icon {
+  background-color: rgb(223, 158, 36);
+  font-size: 30px;
+}
+
+@media (max-width: 1100px) {
+  .header {
+    flex-wrap: wrap;
+    height: auto;
   }
+
+  .navbar-toggler {
+    display: block;
+    color: white;
+    margin-left: auto;
+  }
+
+  .header-left {
+    width: auto;
+    position: static;
+  }
+
+  .header-right {
+    width: 100%;
+    position: static;
+    order: 3;
+  }
+
+  .header-right.navbar-collapse {
+    width: 100%;
+    order: 3;
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.3s ease-out;
+    justify-content: flex-start;
+  }
+
+  .header-right.navbar-collapse.show {
+    max-height: 500px;
+  }
+
+  .header-links {
+    flex-direction: column;
+    padding: 10px 0;
+    align-items: flex-start;
+  }
+
+  .header-right.navbar-collapse.show .header-links {
+    align-items: flex-end;
+    padding-right: 20px;
+  }
+} 
+
+
+
+/*reverting old watchlist styling - watchlist styling*/
+
+.page-title {
+  background-color: rgb(223, 158, 36);
+  color: white;
+  font-weight: bold;
+  letter-spacing: 5px;
+  padding: 30px;
+  border-radius: 10px;
+  margin-bottom: 40px;
+  max-width: 980px;
+  margin: 0 auto 40px auto;
 }
 
-.card {
-  padding: 2em;
+.watchlist-card {
+  display: flex;
+  flex-direction: row;
+  height: 185px;
+  padding: 16px;
+  justify-content: space-between;
+  text-align: left;
 }
 
-.read-the-docs {
-  color: #888;
+.movie-poster {
+  height: 300px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
 }

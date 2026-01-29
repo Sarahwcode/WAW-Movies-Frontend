@@ -1,0 +1,15 @@
+.MuiTypography-root.result-title {
+  font-size: 50px;
+}
+
+.MuiTypography-root.result-date {
+  font-size: 30px;
+  font-weight: 500;
+}
+
+.overview-container {
+    background-color: #dddddd;
+    border-radius: 8px;
+    margin-left: 10px;
+    margin-right: 10px;
+}

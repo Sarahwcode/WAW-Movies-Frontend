@@ -1,0 +1,31 @@
+.container {
+  padding-top: 20px;
+  border-radius: 6px;
+  color: rgb(223, 158, 36);
+  background-color: #090a13cc;
+}
+
+.popular-title {
+  font-size: 36px;
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  font-weight: bold;
+  text-align: left;
+  color: rgb(223, 158, 36);
+}
+
+.detail-button {
+  background-color: #001489;
+}
+
+.movie-poster {
+  width: 100%;
+  height: auto;
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
+
+.movieTitle {
+  font-size: 20px;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  opacity: 0.95;
+}

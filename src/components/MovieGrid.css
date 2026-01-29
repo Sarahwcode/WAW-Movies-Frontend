@@ -1,0 +1,73 @@
+.movie-grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 20px;
+  padding: 20px;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.movie-card-link {
+  color: inherit;
+}
+
+.movie-card {
+  background-color: #222;
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+  position: relative;
+  margin-top: 100px;
+}
+
+.movie-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.7);
+}
+
+.movie-card img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.movie-card-title {
+  padding: 10px;
+  font-size: 12;
+  font-weight: bold;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: center;
+  color: white;
+}
+
+.no-image {
+  height: 225px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #333;
+  color: #888;
+}
+
+.pagination {
+  gap: 5px;
+  list-style: none;
+  padding: 20px 0;
+  margin: 20px auto;
+  display: flex;
+  justify-content: center;
+}
+
+.page-item.dots .page-link {
+  background-color: transparent;
+  color: #bbb;
+  border: 1px solid transparent;
+  cursor: default;
+}
+
+.page-item.dots .page-link:hover {
+  background-color: transparent;
+  color: #bbb;
+}
