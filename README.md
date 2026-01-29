@@ -1,6 +1,6 @@
 # WAW-Movies Frontend 🎬
 
-This is the React web interface for the WAW-Movies project, built with Vite for a fast development experience.
+This is the React-based frontend for the WAW-Movies application. It provides user authentication, profile management, and a movie browsing interface for streaming locations.
 
 ## 🚀 Features
 * **User Authentication**: Login and Registration integrated with a JWT-based backend.
