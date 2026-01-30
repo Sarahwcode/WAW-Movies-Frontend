@@ -2,7 +2,7 @@ import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import { Provider } from "react-redux";
-import API from '../api';
+import API from './api.js';
 // Page/Component Imports - Consolidate all external imports here
 import PopularMovies from "./pages/popular.jsx"; // 
 import Login from "./pages/Login.jsx";
