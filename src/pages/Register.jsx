@@ -21,7 +21,7 @@ const RegisterForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await API.post('/api/auth/profile', formData);
+      const response = await API.post('/api/auth/register', formData);
       alert('User registered successfully!');
 
     } catch (error) {

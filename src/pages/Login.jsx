@@ -48,7 +48,7 @@ const Login = () => {
     const requestData = async () => {
     try {
         // Change localhost to your Render URL
-        const { data } = await API.get('/api/auth/profile', {
+        const { data } = await API.get('/api/auth/login', {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem("token")}`,
             },
