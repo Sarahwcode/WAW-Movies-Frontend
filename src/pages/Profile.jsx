@@ -49,7 +49,7 @@ export default function Profile() {
     };
 
     try {
-      const res = await API.post('/api/auth/profile', updateData, {
+      const res = await API.get('/api/auth/profile', updateData, {
         headers: { Authorization: `Bearer ${token}` }
       });
       // Assuming backend returns an array of messages

@@ -54,7 +54,7 @@ function App() {
   const login = async (credentials) => {
     console.log(credentials);
     try {
-      const { data } = await API.post('/api/auth/profile',
+      const { data } = await API.post('/api/auth/login',
         credentials
       );
       localStorage.setItem("token", data.token);
