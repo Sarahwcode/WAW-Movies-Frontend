@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import './register.css';
+import API from '../api';
 
 const RegisterForm = () => {
   const [formData, setFormData] = useState({
@@ -20,7 +21,7 @@ const RegisterForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:3001/api/auth/register', formData);
+      const response = await API.post('/api/auth/profile', formData);
       alert('User registered successfully!');
 
     } catch (error) {

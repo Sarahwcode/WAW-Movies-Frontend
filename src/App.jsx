@@ -2,7 +2,7 @@ import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import { Provider } from "react-redux";
-
+import API from '../api';
 // Page/Component Imports - Consolidate all external imports here
 import PopularMovies from "./pages/popular.jsx"; // 
 import Login from "./pages/Login.jsx";
@@ -54,8 +54,7 @@ function App() {
   const login = async (credentials) => {
     console.log(credentials);
     try {
-      const { data } = await axios.post(
-        "http://localhost:3001/api/auth/login",
+      const { data } = await API.post('/api/auth/profile',
         credentials
       );
       localStorage.setItem("token", data.token);

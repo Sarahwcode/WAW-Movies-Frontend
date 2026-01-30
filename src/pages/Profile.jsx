@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./profile.css";
-
+import API from '../api'; 
 export default function Profile() {
   const [user, setUser] = useState(null);
   const [messages, setMessages] = useState([]);
@@ -17,7 +17,7 @@ export default function Profile() {
       return;
     }
 
-    axios.get("http://localhost:3001/api/auth/profile", {
+   API.get('/api/auth/profile', {
       headers: { Authorization: `Bearer ${token}` }
     })
     .then(res => {
@@ -49,7 +49,7 @@ export default function Profile() {
     };
 
     try {
-      const res = await axios.post("http://localhost:3001/api/auth/update-profile", updateData, {
+      const res = await API.post('/api/auth/profile', updateData, {
         headers: { Authorization: `Bearer ${token}` }
       });
       // Assuming backend returns an array of messages

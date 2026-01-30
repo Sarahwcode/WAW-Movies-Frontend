@@ -3,6 +3,9 @@ import './login.css'
 import axios from 'axios'
 import AuthContext from '../contexts/AuthContext.jsx';
 import { Link } from 'react-router-dom';
+import API from '../api'; // Adjust the path as needed
+
+//API.get('/api/auth/profile', { ... })
 
 const Login = () => {
     const [credentials, setCredentials] = useState({
@@ -40,9 +43,12 @@ const Login = () => {
  };
 
 
- const requestData = async () => {
+
+
+    const requestData = async () => {
     try {
-        const {data} = await axios("http://localhost:3001/api/auth/profile", {
+        // Change localhost to your Render URL
+        const { data } = await API.get('/api/auth/profile', {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem("token")}`,
             },
@@ -53,7 +59,7 @@ const Login = () => {
     } catch (error) {
         console.log(error);
     }
-    };
+};
 
 
   return (
