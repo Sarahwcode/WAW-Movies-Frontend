@@ -1,140 +1,75 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Inter", sans-serif;
+/* Centering the view mode */
+
+.update-profile{
+
+position: fixed;
+    /* 1. Desktop Centering */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    
+    /* 2. Sizing */
+    width: 90%; /* Use percentage for responsiveness */
+    max-width: 450px; /* Limits size on large screens */
+    max-height: 90vh; /* Prevents card from being taller than the screen */
+    overflow-y: auto; /* Adds scrollbar if content is too long for small screens */
+    
+    /* 3. Styling */
+    backdrop-filter: blur(25px);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    padding: 2rem;
+    color: rgb(223, 158, 36);
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 20, 137, 0.9); /* Slight transparency looks better with blur */
+    z-index: 1000;
+}
+.profile-info {
+    text-align: center;
+    margin-top: 10px;
 }
 
-body {
-  background: #f4f5f7;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  padding: 0;
-  margin: 0;
+.profile-info h1 {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 5px;
 }
 
-.update-profile {
-  width: 100%;
-  max-width: 680px;
-  background: #fff;
-  padding: 35px;
-  border-radius: 24px;
-  box-shadow: 0 6px 30px rgba(0, 0, 0, 0.08);
-  animation: fadeIn 0.4s ease-in-out;
-  text-align: center;
+.profile-info p {
+    font-size: 1.1rem;
+    color: #777;
+    margin-bottom: 20px;
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to   { opacity: 1; transform: translateY(0); }
+.profile-img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid #6366f1;
+    margin-bottom: 20px;
 }
 
-.update-profile img {
-  width: 140px;
-  height: 140px;
-  border-radius: 50%;
-  display: block;
-  margin: 0 auto 25px;
-  object-fit: cover;
-  border: 4px solid #e9ecef;
-}
-
-.flex {
-  display: flex;
-  gap: 25px;
-  margin-bottom: 20px;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-.inputBox {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  max-width: 300px;
-  margin: 0 auto;
-}
-
-.inputBox span {
-  font-size: 14px;
-  margin-bottom: 6px;
-  color: #333;
-  font-weight: 500;
-  text-align: left;
-}
-
-.box {
-  width: 100%;
-  padding: 12px 14px;
-  border: 1px solid #dcdcdc;
-  border-radius: 12px;
-  margin-bottom: 18px;
-  background: #fafafa;
-  transition: 0.2s;
-  font-size: 14px;
-  color: #000;
-}
-
-.box:focus {
-  border-color: #6366f1;
-  background: #fff;
-  outline: none;
-  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.18);
-}
-
-.btn {
-  width: 100%;
-  padding: 15px;
-  border-radius: 14px;
-  border: none;
-  background: #6366f1;
-  color: white;
-  cursor: pointer;
-  font-size: 16px;
-  font-weight: 600;
-  margin: 0 auto;
-  display: block;
-  transition: 0.25s;
-}
-
-.btn:hover {
-  background: #4f46e5;
-  transform: translateY(-1px);
-}
-
-.delete-btn {
-  display: block;
-  text-align: center;
-  margin-top: 15px;
-  color: #ef4444;
-  font-weight: 600;
-  transition: 0.25s;
-}
-
-.delete-btn:hover {
-  color: #b91c1c;
-}
-
-
-.message {
-  background: #fef3c7;
-  color: #92400e;
-  border-left: 4px solid #fbbf24;
-  padding: 12px 15px;
-  border-radius: 8px;
-  margin-bottom: 12px;
-  font-size: 14px;
-}
-
-@media (max-width: 700px) {
-  .flex {
+/* Button grouping for the form */
+.button-group {
+    display: flex;
     flex-direction: column;
-    gap: 15px;
-  }
+    gap: 10px;
+    margin-top: 10px;
 }
+@media (max-width: 480px) {
+    .update-profile {
+        padding: 1.5rem;
+        width: 95%;
+    }
+    
+    .profile-img {
+        width: 100px; /* Smaller image on mobile */
+        height: 100px;
+    }
 
-.input_box {
-  max-width: 100%;
+    .flex {
+        flex-direction: column; /* Stack inputs vertically on mobile */
+        gap: 10px;
+    }
 }

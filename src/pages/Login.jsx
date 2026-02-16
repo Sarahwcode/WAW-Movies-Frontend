@@ -2,8 +2,9 @@ import React, {useState, useContext} from 'react'
 import './login.css'
 import axios from 'axios'
 import AuthContext from '../contexts/AuthContext.jsx';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import API from '../api'; // Adjust the path as needed
+import { useEffect } from 'react';
 
 //API.get('/api/auth/profile', { ... })
 
@@ -13,6 +14,7 @@ const Login = () => {
         password: '',
     });
     const auth = useContext(AuthContext);
+    const navigate = useNavigate();
 
     const [data, setData] = useState(null);
     const {username, password} = credentials;
@@ -41,6 +43,12 @@ const Login = () => {
   auth.logout();
   alert("Logout successful");
  };
+
+ useEffect(() => {
+    if(auth.isLoggedIn){
+        navigate("/profile");
+    }
+ }, [auth.isLoggedIn, navigate]);
 
 
 
@@ -102,17 +110,7 @@ const Login = () => {
                <div className="sign-up">
                 <span>Don't have an account? <Link to="/register">Sign up!</Link></span>
             </div>
-                        {auth.isLoggedIn && (
-                            <>
-                                <Link to="/profile" className="input-submit" style={{ textDecoration: 'none', display: 'inline-block', textAlign: 'center', padding: '12px 16px', marginTop: '8px' }}>
-                                    View Profile
-                                </Link>
-                                <button onClick={logout}>
-                                    Logout
-                                </button>
-                            </>
-                        )}
-
+                       
         </div>
         {data && (
             <div> {data} </div>

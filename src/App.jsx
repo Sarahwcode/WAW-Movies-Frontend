@@ -246,12 +246,30 @@ function App() {
                 {" "}
                 Watchlist
               </Link>
-              <Link to="/register" className="register-link">
-                Register
-              </Link>
-              <Link to="/login" className="login-link">
-                Login
-              </Link>
+             {isLoggedIn ? (
+    /* Links visible only when LOGGED IN */
+    <>
+      <Link to="/profile" className="login-link">
+        View Profile
+      </Link>
+      <button
+        onClick={logout} 
+        className="logout-nav-btn login-link header-links"
+      >
+        Logout
+      </button>
+    </>
+  ) : (
+    /* Links visible only when LOGGED OUT */
+    <>
+      <Link to="/register" className="register-link">
+        Register
+      </Link>
+      <Link to="/login" className="login-link">
+        Login
+      </Link>
+    </>
+  )}
             </nav>
           </div>
         </div>
