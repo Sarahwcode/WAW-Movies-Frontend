@@ -9,7 +9,8 @@ const UpdateProfileForm = ({ user, setUser, handleImageChange, handleSubmit, mes
 
       <div className="flex">
         <div className="inputBox">
-          <span>Username :</span>
+          <div>
+          <div>Username :</div>
           <input
             type="text"
             className="box"
@@ -17,8 +18,9 @@ const UpdateProfileForm = ({ user, setUser, handleImageChange, handleSubmit, mes
             onChange={(e) => setUser({ ...user, name: e.target.value })}
             name="update_name"
           />
-
-          <span>Your email :</span>
+          </div>
+           <div>
+          <div>Your email :</div>
           <input
             type="email"
             className="box"
@@ -26,8 +28,9 @@ const UpdateProfileForm = ({ user, setUser, handleImageChange, handleSubmit, mes
             onChange={(e) => setUser({ ...user, email: e.target.value })}
             name="update_email"
           />
+          </div>
 
-          <span>Update your pic :</span>
+          <div>Update your pic :</div>
           <input
             type="file"
             className="box"

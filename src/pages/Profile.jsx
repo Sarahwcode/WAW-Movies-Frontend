@@ -107,7 +107,7 @@ export default function Profile() {
           
           <div className="flex">
             <div className="inputBox">
-              <span>Username :</span>
+              <div>Username :</div>
               <input
                 type="text"
                 className="box"
@@ -116,7 +116,7 @@ export default function Profile() {
                 name="update_name"
               />
 
-              <span>Your email :</span>
+              <div>Your email :</div>
               <input
                 type="email"
                 className="box"
@@ -125,7 +125,7 @@ export default function Profile() {
                 name="update_email"
               />
 
-              <span>Update your pic :</span>
+              <div>Update your pic :</div>
               <input
                 type="file"
                 className="box"
@@ -136,11 +136,11 @@ export default function Profile() {
             </div>
 
             <div className="inputBox">
-              <span>Old password :</span>
+              <div>Old password :</div>
               <input type="password" name="update_pass" className="box" />
-              <span>New password :</span>
+              <div>New password :</div>
               <input type="password" name="new_pass" className="box" />
-              <span>Confirm password :</span>
+              <div>Confirm password :</div>
               <input type="password" name="confirm_pass" className="box" />
             </div>
           </div>
