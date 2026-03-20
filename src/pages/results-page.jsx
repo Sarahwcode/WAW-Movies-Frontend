@@ -139,9 +139,10 @@ function Results() {
       <Box
         sx={{
           display: "flex",
+          flexDirection: { xs: "column", md: "row" },
           gap: 3,
           mb: 3,
-          alignItems: "stretch",
+          alignItems: { xs: "center", md: "stretch" },
         }}
       >
         {/* left column*/}
@@ -150,7 +151,8 @@ function Results() {
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
-            mt: 6,
+            mt: { xs: 2, md: 6 },
+            width: { xs: "100%", md: "auto" },
           }}
         >
           <Typography
@@ -166,7 +168,11 @@ function Results() {
             <img
               src={`${TMDB_IMAGE_BASE_URL}${movieDetails.poster_path}`}
               alt={movieDetails.title}
-              style={{ width: "300px", height: "auto", borderRadius: "8px" }}
+              style={{width: "100%",
+          maxWidth: "350px", 
+          height: "auto",
+          borderRadius: "8px",
+          boxShadow: 3}}
             />
           )}
         </Box>
@@ -176,9 +182,10 @@ function Results() {
             display: "flex",
             flexDirection: "column",
             flex: 1,
+            width: "100%",
           }}
         >
-          <Box sx={{ flexGrow: 1 }} />
+         <Box sx={{ flexGrow: 1, display: { xs: "none", md: "block" } }} />
           <Box sx={{ display: "flex", justifyContent: "center", mb: 1 }}>
             <ScoreBadge score={movieDetails.vote_average} />
           </Box>
