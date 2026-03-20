@@ -10,8 +10,8 @@ position: fixed;
     
     /* 2. Sizing */
     width: 100%; /* Use percentage for responsiveness */
-    max-width: 450px; /* Limits size on large screens */
-    max-height: 90vh; /* Prevents card from being taller than the screen */
+    max-width: 700px; /* Limits size on large screens */
+    max-height: 150vh; /* Prevents card from being taller than the screen */
     overflow-y: auto; /* Adds scrollbar if content is too long for small screens */
     
     /* 3. Styling */
@@ -50,9 +50,12 @@ position: fixed;
     margin-bottom: 20px;
 }
 .box{
-    width: 250px;
+    width: 500px;
     height: 30px;
     max-width: 100%;
+}
+.inputBox {
+    font-size: 25px;
 }
 
 /* Button grouping for the form */
