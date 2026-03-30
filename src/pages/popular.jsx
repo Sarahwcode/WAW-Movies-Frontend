@@ -79,6 +79,7 @@ function PopularMovies({ movieData, watchlist = [], toggleWatchlist, resetFilter
               "&::-webkit-scrollbar": { display: "none" },
               msOverflowStyle: "none",
               scrollbarWidth: "none",
+              height: "150%"
             }}
           >
             {movieData.map((movie) => (
@@ -87,7 +88,7 @@ function PopularMovies({ movieData, watchlist = [], toggleWatchlist, resetFilter
                 elevation={3}
                 sx={{
                   flexShrink: 0,
-                  width: { xs: "90%", sm: "45%", md: "23.5%" },
+                  width: { xs: "90%", sm: "45%", md: "25%" },
                   margin: "10px 8px",
                   padding: "20px",
                   textAlign: "left",
@@ -106,7 +107,7 @@ function PopularMovies({ movieData, watchlist = [], toggleWatchlist, resetFilter
                     right: 10,
                     zIndex: 5,
                     backgroundColor: "rgba(255, 255, 255, 0.7)",
-                    "&:hover": { backgroundColor: "rgba(255, 255, 255, 1)" },
+                    "&:hover": { backgroundColor: "rgb(223, 158, 36)" },
                   }}
                 >
                   {isInWatchlist(movie.id) ? (

@@ -121,7 +121,7 @@ function Results() {
     <Paper
       className="result-container"
       elevation={6}
-      sx={{ p: 4, mt: 4, mx: "auto", maxWidth: 800 }}
+      sx={{ p: 4, mt: 4, mx: "auto", maxWidth: "100%", width: "70%" }}
     >
       <Box sx={{ position: "relative", mb: 1, mt: 2 }}>
         <Typography
@@ -131,7 +131,7 @@ function Results() {
         >
           {movieDetails.title}
         </Typography>
-        <Typography variant="body2" sx={{ mt: 1, textAlign: "center" }}>
+        <Typography variant="body2" sx={{ mt: 1, textAlign: "center", fontSize: "25px" }}>
           {movieDetails.tagline}
         </Typography>
       </Box>
@@ -193,7 +193,7 @@ function Results() {
             <Typography variant="h5" sx={{ mb: 1 }}>
               Overview
             </Typography>
-            <Typography variant="body1" sx={{ textAlign: "left", pt: 1 }}>
+            <Typography variant="body1" sx={{ textAlign: "left", pt: 1, fontSize: "24px" }}>
               {movieDetails.overview}
             </Typography>
             <Typography
@@ -230,7 +230,7 @@ function Results() {
 
       {/* --- WATCH PROVIDERS SECTION --- */}
       <Box sx={{ mt: 3, pt: 2, borderTop: "1px solid #ccc" }}>
-        <Typography variant="h5" gutterBottom>
+        <Typography variant="h4" gutterBottom sx={{ fontFamily: "Lucida Sans" }}>
           Where to Watch (Region: {WATCH_REGION})
         </Typography>
 
@@ -240,10 +240,10 @@ function Results() {
             {/* Display Streaming Providers */}
             {watchProviders.flatrate && (
               <Box sx={{ mb: 2 }}>
-                <Typography variant="h6" sx={{ color: "green" }}>
-                  Stream:
+                <Typography variant="h4" sx={{ color: "rgb(223, 158, 36)", fontFamily: "Lucida Sans" }}>
+                  Streaming:
                 </Typography>
-                <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1 }}>
+                <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1, justifyContent: "center", alignItems: "center"}}>
                   {watchProviders.flatrate.map((provider) => (
                     <img
                       key={provider.provider_id}
@@ -251,9 +251,9 @@ function Results() {
                       alt={provider.provider_name}
                       title={provider.provider_name}
                       style={{
-                        width: "50px",
-                        height: "50px",
-                        borderRadius: "5px",
+                        width: "100px",
+                        height: "100px",
+                        borderRadius: "5px"
                       }}
                     />
                   ))}
@@ -264,10 +264,10 @@ function Results() {
             {/* Display Rental Providers */}
             {watchProviders.rent && (
               <Box sx={{ mb: 2 }}>
-                <Typography variant="h6" sx={{ color: "blue" }}>
+                <Typography variant="h4" sx={{ color: "rgb(223, 158, 36)", fontFamily: "Lucida Sans" }}>
                   Rent:
                 </Typography>
-                <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1 }}>
+                <Box sx={{ display: "flex", flexWrap: "wrap", gap: 2,  justifyContent: "center", alignItems: "center"}}>
                   {watchProviders.rent.map((provider) => (
                     <img
                       key={provider.provider_id}
@@ -275,8 +275,8 @@ function Results() {
                       alt={provider.provider_name}
                       title={provider.provider_name}
                       style={{
-                        width: "50px",
-                        height: "50px",
+                        width: "100px",
+                        height: "100px",
                         borderRadius: "5px",
                       }}
                     />
